@@ -6,5 +6,10 @@ define php::extension (
     package { $package:
       ensure => $ensure,
     }
+    if defined(Class['::php_fpm']) {
+      Package[$package] {
+        notify => Class['::php_fpm::service'],
+      }
+    }
   }
 }
