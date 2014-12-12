@@ -4,9 +4,11 @@
 #
 class php::config {
   file { $::php::config:
-    owner   => 0,
-    group   => 0,
-    mode    => 0644,
-    content => template($config_template)
+    ensure       => file,
+    owner        => 0,
+    group        => 0,
+    mode         => '0644',
+    content      => template($::php::config_template),
+    validate_cmd => "$::php::prefix/bin/php -l -c %",
   }
 }
